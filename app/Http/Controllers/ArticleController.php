@@ -15,7 +15,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::paginate();
+        return view('admin.index', compact('articles'));
     }
 
     /**
@@ -25,7 +26,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -36,7 +37,11 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        $article = new Article();
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->save();
+        return redirect('/admin');
     }
 
     /**
@@ -58,7 +63,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('admin.edit', compact('article'));
     }
 
     /**
@@ -70,7 +75,10 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->save();
+        return redirect('/admin');
     }
 
     /**
@@ -81,6 +89,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect('/admin');
     }
 }

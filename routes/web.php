@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index']);
+Route::get('/admin', [ArticleController::class, 'index']);
+Route::get('/admin/create', [ArticleController::class, 'create']);
+Route::post('/admin', [ArticleController::class, 'store']);
+Route::get('/admin/{article}', [ArticleController::class, 'edit']);
+Route::post('/admin/{article}', [ArticleController::class, 'update']);
+Route::get('/admin/{article}/delete', [ArticleController::class, 'destroy']);
